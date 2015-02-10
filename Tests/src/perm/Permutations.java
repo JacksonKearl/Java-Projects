@@ -10,7 +10,11 @@ public class Permutations {
 		ArrayList<Character> charList = new ArrayList<Character> ();
 
 		for (int i = 0; i < text.length; i++) {
-			charList.add(text[i]);
+			
+			if (text[i] != 13) { //Windows systems include the carriage return in the stream... grr.
+				charList.add(text[i]);
+			}
+			
 		}
 
 		return permutate("", charList);
@@ -62,7 +66,8 @@ public class Permutations {
 
 			System.out.print("Enter text to permutate: ");
 			char[] text = userIn.next().toCharArray();
-			userIn.close();			
+			userIn.close();		
+			
 			
 			if ( text.length > 8 ) {
 				 throw new OutOfMemoryError();
