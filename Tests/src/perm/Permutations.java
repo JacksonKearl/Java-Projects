@@ -2,6 +2,7 @@ package perm;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Permutations {
@@ -9,7 +10,7 @@ public class Permutations {
 	public static String permutate(char[] text) 
 	{
 		ArrayList<Character> charList = new ArrayList<Character> ();
-		
+
 		for (int i = 0; i < text.length; i++) {
 			charList.add(text[i]);
 		}
@@ -34,6 +35,29 @@ public class Permutations {
 		return retVal;
 	}
 
+	private static String splitAndUnique(String allPerms) 
+	{
+		HashMap<String, Boolean> lineAndVal = new HashMap<String, Boolean>();
+
+		String finalString = "";
+
+		int delimIndex = allPerms.indexOf("\n");
+		int beginIndex = 0;
+
+		while (delimIndex != -1) {
+			String line = allPerms.substring(beginIndex, delimIndex);
+			beginIndex = delimIndex+1;
+			delimIndex = allPerms.indexOf('\n', beginIndex);
+
+			if (!lineAndVal.containsKey(line)) {
+				lineAndVal.put(line, true);
+				finalString += line + "\n";
+			}
+		}
+
+		return finalString;
+	}
+
 	public static void main(String[] args) 
 	{
 		try {
@@ -50,7 +74,7 @@ public class Permutations {
 
 			String allPerms = permutate(text);
 			String valList= splitAndUnique(allPerms);
-			
+
 			out.write(valList);
 
 			out.close();
@@ -60,24 +84,5 @@ public class Permutations {
 		} 
 	}
 
-	private static String splitAndUnique(String allPerms) 
-	{
-		ArrayList<String> allLines = new ArrayList<String>();
-		String finalString = "";
-		
-		int delimIndex = allPerms.indexOf("\n");
-		int beginIndex = 0;
-		
-		while (delimIndex != -1) {
-			String line = allPerms.substring(beginIndex, delimIndex);
-			beginIndex = delimIndex+1;
-			delimIndex = allPerms.indexOf('\n', beginIndex);
-			if (!allLines.contains(line)) {
-				allLines.add(line);
-				finalString += line + "\n";
-			}
-		}
-		
-		return finalString;
-	}
+
 }
