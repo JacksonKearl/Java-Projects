@@ -1,9 +1,7 @@
 package perm;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class Permutations {
 
@@ -31,7 +29,6 @@ public class Permutations {
 				rest.add(i, removed);
 			}
 		}
-
 		return retVal;
 	}
 
@@ -54,24 +51,27 @@ public class Permutations {
 				finalString += line + "\n";
 			}
 		}
-
 		return finalString;
 	}
 
 	public static void main(String[] args) 
 	{
 		try {
-			File file = new File("src/perm/Output.txt");
-
-			FileWriter out = new FileWriter(file);
-
 			Scanner userIn = new Scanner(System.in);
 			userIn.useDelimiter("\n");
 
 			System.out.print("Enter text to permutate: ");
 			char[] text = userIn.next().toCharArray();
 			userIn.close();			
+			
+			if ( text.length > 8 ) {
+				 throw new OutOfMemoryError();
+			 }
+			
+			File file = new File("src/perm/Output.txt");
 
+			FileWriter out = new FileWriter(file);
+			
 			String allPerms = permutate(text);
 			String valList= splitAndUnique(allPerms);
 
@@ -79,10 +79,8 @@ public class Permutations {
 
 			out.close();
 
-		} catch (IOException e) {
+		} catch (Throwable e) {
 			e.printStackTrace();
 		} 
 	}
-
-
 }
