@@ -3,40 +3,68 @@ package coolSet5;
 import java.util.*;
 
 public class Numbers {
-	ArrayList<Integer> list = new ArrayList<Integer>();
+	HashMap<Integer, Boolean> map = new HashMap<Integer, Boolean>();
+
 	public Numbers(int i) {
-		HashMap<Integer, Boolean> map = new HashMap<Integer, Boolean>();
 		int count = 0;
 		while (count != i) {
 			int nextVal = (int)(Math.random()*10000);
 			if (!map.containsKey(nextVal)) {
-				map.put(nextVal, true);
-				list.add(nextVal);
+				map.put(nextVal, isPerfect(nextVal));
 				count++;
 			}
 		}
 	}
 
-	public void showArray() {
+	public static ArrayList<Integer> getListOfFactors(int number)
+	{
+		ArrayList<Integer> factors = new ArrayList<Integer>();
+		for (int i = 1; i < number; i ++) {
+			if (number%i == 0) {
+				factors.add(i);
+			}
+		}
+
+		return factors;
+	}
+	
+	public String toString() {
 		int count = 0;
-		for (Integer i : list) {
-			System.out.print(i + "\t");
+		String retString = "";
+		for (Map.Entry<Integer, Boolean> item : map.entrySet()) {
+			retString += item.getKey() + "   \t";
 			count++;
 			if (count % 10 == 0) {
-				System.out.println();
+				retString += "\n";
 			}
 		}
 		
-	}
-
-	public void findPerfect() {
-		// TODO Auto-generated method stub
+		return retString;
 		
+	}
+	
+	private Boolean isPerfect(int num) {
+		ArrayList<Integer> factors = getListOfFactors(num);
+		int sum = 0;
+		
+		for (Integer i : factors) {
+			sum += i;
+		}
+
+		return (num == sum);
 	}
 
 	public ArrayList<Integer> getPerfectList() {
-		// TODO Auto-generated method stub
-		return null;
+
+		ArrayList<Integer> listOfPerfect = new ArrayList<Integer>();
+		
+		for (Map.Entry<Integer, Boolean> item : map.entrySet()) {
+			if (item.getValue()) {
+				listOfPerfect.add(item.getKey());
+			}
+		}
+		
+		return listOfPerfect;
 	}
 
 }

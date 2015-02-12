@@ -42,10 +42,9 @@ public class IllProbablyJustPutEverythingInHere {
 
 			FileWriter out = new FileWriter(file);
 
-			Numbers burrito = new Numbers(300);
-			out.write("Array \"bunch\" is:\n");
-			burrito.showArray();
-			burrito.findPerfect();
+			Numbers burrito = new Numbers(1500);
+			out.write("Array \"bunch\" is:\n" + burrito);
+			
 			ArrayList<Integer> taco = burrito.getPerfectList();
 			out.write("\n\nThe perfect squares are: ");
 			for( Integer i : taco )
