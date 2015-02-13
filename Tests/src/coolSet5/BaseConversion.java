@@ -1,41 +1,37 @@
 package coolSet5;
 
-import java.util.ArrayList;
 import java.util.Scanner;
+
 public class BaseConversion
 {
-	public static Integer convert(int base) {
-		System.out.println("Enter Value:");
-		Scanner in = new Scanner(System.in);
-		in.useDelimiter("/n");
+	static Scanner	in	= new Scanner(System.in);
+	
+	public static void convert(int base)
+	{
+		System.out.print("Enter Value: ");
 		String val = in.next();
-		in.close();
-		int v = String.
+		Integer decVal = Integer.parseInt(val, base);
+		
+		System.out.println("Binary: " + Integer.toBinaryString(decVal));
+		System.out.println("Decimal: " + Integer.toString(decVal));
+		System.out.println("Hexidecimal: " + Integer.toHexString(decVal));
 	}
 	
-	public static void main(String args [])
+	public static void main(String args[])
 	{
-		Integer binary = new Integer(0);
-		boolean okay = true;
-		do
-		{
-			okay = true;
-			System.out.print("Input Number Type(dec/hex/bin): ");
-			Scanner in = new Scanner(System.in);
-			in.useDelimiter("/n");
-			String inputType = in.next();
-			in.close();
-			switch (inputType) {
+		System.out.print("Input Number Type(dec/hex/bin): ");
+		in.useDelimiter("\n");
+		String inputType = in.next();
+		switch (inputType) {
 			case "dec":
-				
+				convert(10);
 				break;
 			case "hex":
-				
+				convert(16);
 				break;
 			case "bin":
-				
+				convert(2);
 				break;
-			}
-		}while(!okay);
+		}
 	}
 }
