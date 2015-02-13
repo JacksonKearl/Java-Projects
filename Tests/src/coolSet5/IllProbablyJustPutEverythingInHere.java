@@ -55,6 +55,48 @@ public class IllProbablyJustPutEverythingInHere {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void iDThing(int amt) {
+		IDSet set = new IDSet(amt);
+		try {
+			FileWriter out = new FileWriter(new File("src/coolset5/IDs"));
+			out.write(set + "\n");
+			out.write(set.sorted());
+			out.close();
+			
+		} catch (Throwable t) {
+			t.printStackTrace();
+		}
+
+	}
+	
+	public static void primesBelow(int amt) {
+		boolean[] arr = new boolean[amt];
+		for (int i = 0; i< amt; i++) { arr[i] = true; };
+		for (int i = 2; i< amt; i++) {
+			if (arr[i]) {
+				for (int iter = 2*i; iter < amt; iter += i) {
+					arr[iter] = false;
+				}
+			}
+		}
+		String retVal = "";
+		int count = 0;
+		for (int i = 1; i < amt; i++) {
+			if (arr[i]) {
+				retVal += i + "   \t";
+				count++;
+				if (count%7 == 0) {
+					retVal += '\n';
+				}
+			}
+		}
+		System.out.println(retVal);
+	}
+	
+	public static void binary(int n) {
+		System.out.println(Integer.toBinaryString(n));
+	}
 
 	public static void main(String[] args) 
 	{
@@ -62,7 +104,10 @@ public class IllProbablyJustPutEverythingInHere {
 		getListOfFactors(9);
 		getListOfFactors(23);
 		listThing();
-
+		iDThing(20);
+		primesBelow(200);
+		binary(31);
+		
 
 
 	}
