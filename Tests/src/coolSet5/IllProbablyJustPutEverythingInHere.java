@@ -4,29 +4,30 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.*;
 
-public class IllProbablyJustPutEverythingInHere {
-
-	public static void randomHisto() 
+public class IllProbablyJustPutEverythingInHere
+{
+	
+	public static void randomHisto()
 	{
 		int[] arr = new int[10];
-
+		
 		System.out.println("Index\tValue\tAmount\t");
-		for (int i = 0 ; i< arr.length ; i++) {
-			arr[i] = (int)(Math.random()*20);
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = (int) (Math.random() * 20);
 			System.out.print(i + "\t" + arr[i] + "\t");
-			for (int j = 0; j< arr[i]; j++) {
+			for (int j = 0; j < arr[i]; j++) {
 				System.out.print("*");
 			}
 			System.out.println();
 		}
 	}
-
+	
 	public static ArrayList<Integer> getListOfFactors(int number)
 	{
 		ArrayList<Integer> factors = new ArrayList<Integer>();
 		System.out.print("[1");
-		for (int i = 2; i < number; i ++) {
-			if (number%i == 0) {
+		for (int i = 2; i < number; i++) {
+			if (number % i == 0) {
 				System.out.print(", " + i);
 				factors.add(i);
 			}
@@ -34,21 +35,22 @@ public class IllProbablyJustPutEverythingInHere {
 		System.out.println("]");
 		return factors;
 	}
-
-	public static void listThing() 
+	
+	public static void listThing()
 	{
 		try {
 			File file = new File("src/coolSet5/Output.txt");
-
+			
 			FileWriter out = new FileWriter(file);
-
+			
 			Numbers burrito = new Numbers(1500);
 			out.write("Array \"bunch\" is:\n" + burrito);
 			
 			ArrayList<Integer> taco = burrito.getPerfectList();
 			out.write("\n\nThe perfect squares are: ");
-			for( Integer i : taco )
-			{ out.write(String.format("%-8d", i)); }
+			for (Integer i : taco) {
+				out.write(String.format("%-8d", i));
+			}
 			
 			out.close();
 		} catch (Throwable e) {
@@ -56,7 +58,8 @@ public class IllProbablyJustPutEverythingInHere {
 		}
 	}
 	
-	public static void iDThing(int amt) {
+	public static void iDThing(int amt)
+	{
 		IDSet set = new IDSet(amt);
 		try {
 			FileWriter out = new FileWriter(new File("src/coolset5/IDs"));
@@ -67,15 +70,19 @@ public class IllProbablyJustPutEverythingInHere {
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
-
+		
 	}
 	
-	public static void primesBelow(int amt) {
+	public static void primesBelow(int amt)
+	{
 		boolean[] arr = new boolean[amt];
-		for (int i = 0; i< amt; i++) { arr[i] = true; };
-		for (int i = 2; i< amt; i++) {
+		for (int i = 0; i < amt; i++) {
+			arr[i] = true;
+		}
+		;
+		for (int i = 2; i < amt; i++) {
 			if (arr[i]) {
-				for (int iter = 2*i; iter < amt; iter += i) {
+				for (int iter = 2 * i; iter < amt; iter += i) {
 					arr[iter] = false;
 				}
 			}
@@ -86,7 +93,7 @@ public class IllProbablyJustPutEverythingInHere {
 			if (arr[i]) {
 				retVal += i + "   \t";
 				count++;
-				if (count%7 == 0) {
+				if (count % 7 == 0) {
 					retVal += '\n';
 				}
 			}
@@ -94,11 +101,12 @@ public class IllProbablyJustPutEverythingInHere {
 		System.out.println(retVal);
 	}
 	
-	public static void binary(int n) {
+	public static void binary(int n)
+	{
 		System.out.println(Integer.toBinaryString(n));
 	}
-
-	public static void main(String[] args) 
+	
+	public static void main(String[] args)
 	{
 		randomHisto();
 		getListOfFactors(9);
@@ -108,8 +116,6 @@ public class IllProbablyJustPutEverythingInHere {
 		primesBelow(200);
 		binary(31);
 		
-
-
 	}
-
+	
 }
