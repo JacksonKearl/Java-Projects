@@ -153,12 +153,13 @@ public class ArrayTest
 		while (hasDoubles(list)) {
 			for (int i = 0; i < list.length; i++) {
 				int toAdd = a(m, 300);
-				boolean alreadyIn = false;
-				while(!alreadyIn) {
+				boolean alreadyIn = true;
+				while(alreadyIn) {
+					alreadyIn=false;
 					toAdd = a(m, 300);
 					for (int j = 0; j< i; j++) {
 						if (list[j] == toAdd) {
-							alreadyIn = false;
+							alreadyIn = true;
 						}
 				}	
 				list[i] = toAdd;
