@@ -11,7 +11,7 @@ public class Student implements Comparable<Student> {
 	}
 	
 	public String toString() {
-		return fName + "\t" + lName + "\t" + iD + "\n";
+		return String.format("%-7s %-7s %05d\n", fName, lName, iD);
 	}
 	
 	public String randString() {
@@ -26,6 +26,6 @@ public class Student implements Comparable<Student> {
 	}
 	
 	public int compareTo(Student s) {
-		return this.fName.compareTo(s.fName);
+		return fName.compareTo(s.fName);
 	}
 }

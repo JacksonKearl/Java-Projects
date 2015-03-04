@@ -108,13 +108,13 @@ public class IllProbablyJustPutEverythingInHere
 	
 	public static void main(String[] args)
 	{
-		randomHisto();
-		getListOfFactors(9);
-		getListOfFactors(23);
-		listThing();
+		//randomHisto();
+		//getListOfFactors(9);
+		//getListOfFactors(23);
+		//listThing();
 		iDThing(20);
-		primesBelow(200);
-		binary(31);
+		//primesBelow(200);
+		//binary(31);
 		
 	}
 	
