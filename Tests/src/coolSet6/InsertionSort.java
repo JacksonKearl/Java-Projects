@@ -8,24 +8,22 @@ public class InsertionSort {
 		print(arr);
 		
 		for (int i = 1; i < arr.length; i++) {
-			insert(arr, i);
+			sortInsert(arr, i);
 			print(arr);
 		}
 		
 	}
 	
-	private static void insert(int[] arr, int i) 
+	private static void sortInsert(int[] arr, int i) 
 	{
 		int toInsert = i;
 		int insVal = arr[toInsert];
-		for (int j = 0; j < i; j++) {
-			if (arr[toInsert] < arr[j]) {
-				for (int k = toInsert; k > j; k--) {
-					arr[k] = arr[k-1];
-				}
-				arr[j] = insVal;
-			}
+		int j = i;
+		while (j != 0 && arr[toInsert] <= arr[j]) {
+			arr[j+1] = arr[j];
+			j--;
 		}
+		arr[j] = insVal;
 	}
 	private static void print(int[] arr) 
 	{
