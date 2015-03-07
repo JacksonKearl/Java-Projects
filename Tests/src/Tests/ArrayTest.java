@@ -73,7 +73,6 @@ public class ArrayTest
 	 */
 	private static boolean i(int a)
 	{
-		int b = 0;
 		for (int i = 0; i < 1000; i++) {
 			int div = (int) (Math.random() * 40) + 2;
 			if (a % div == 0) {
