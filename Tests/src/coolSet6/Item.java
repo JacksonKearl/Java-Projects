@@ -5,7 +5,7 @@ public class Item implements Comparable<Item> {
 	public SlickList<Item> partOf;
 	
 	public Item() {
-		i = (int)(Math.random()*90+10);
+		i = (int)(Math.random()*40);
 	}
 	
 	public static SlickList<Item> makeList(int n) {
