@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class Driver {
+public class Driver
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		ArrayList<Friend> myList = new ArrayList<Friend>();
 		try {
 			FileReader input = new FileReader("src/friends/names.txt");
@@ -21,11 +23,6 @@ public class Driver {
 				if (c == -1) {
 					myList.add(new Friend(partialString));
 					break;
-				}
-
-				// fuck '\r's on Windows systems.
-				if (c == '\r') {
-					c = input.read();
 				}
 
 				if (c == '\n') {
@@ -44,7 +41,8 @@ public class Driver {
 			output.close();
 
 		} catch (IOException e) {
-			System.out.println("Error. Attempting to continue program execution.");
+			System.out
+					.println("Error. Attempting to continue program execution.");
 		}
 
 		Scanner in = new Scanner(System.in);
@@ -61,7 +59,8 @@ public class Driver {
 
 	}
 
-	private static Friend find(String toSearch, ArrayList<Friend> myList) {
+	private static Friend find(String toSearch, ArrayList<Friend> myList)
+	{
 		for (Friend poss : myList) {
 			if (("" + poss.fName + " " + poss.lName).equals(toSearch))
 				return poss;
@@ -75,7 +74,8 @@ public class Driver {
 		}
 	}
 
-	private static String stringRep(ArrayList<Friend> myList) {
+	private static String stringRep(ArrayList<Friend> myList)
+	{
 		String retVal = "";
 		for (Friend person : myList) {
 			retVal += person;
