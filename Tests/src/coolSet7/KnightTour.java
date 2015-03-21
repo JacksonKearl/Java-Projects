@@ -1,6 +1,7 @@
 package coolSet7;
 
 public class KnightTour {
+	public static final boolean VERBOSE = true;
 	public static final int HEIGHT = 8;
 	public static final int WIDTH = 8;
 

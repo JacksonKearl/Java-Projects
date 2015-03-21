@@ -16,13 +16,35 @@ public class Board {
 	}
 	
 	public int get(Point p) { return board[p.y][p.x]; }
-	public void set(Point p, int val) {	board[p.y][p.x] = val; }
+	public void set(Point p, int val) {	
+		board[p.y][p.x] = val; 
+		if (KnightTour.VERBOSE) {
+			System.out.println(this);
+
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			for(int clear = 0; clear < 20; clear++)
+			{
+
+				System.out.println("\b") ;
+			}
+		}
+	}
 	
 	public String toString()
 	{
 		StringBuilder strBuild = new StringBuilder();
 		for (int i = 0; i < (width*height); i++) {
-			strBuild.append(String.format("%-3d",board[i/width][i%width]));
+			int val = board[i/width][i%width];
+			if (val == 0) {
+				strBuild.append("   ");
+			} else {
+				strBuild.append(String.format("%-3d", val));
+			}
 			if ((i+1)%width == 0) 
 				strBuild.append('\n');
 		}
