@@ -34,7 +34,7 @@ public class Point implements Comparable<Point> {
 					|| (x + delta[i][0] > KnightTour.WIDTH - 1)
 					|| (y + delta[i][1] < 0) 
 					|| (y + delta[i][1] > KnightTour.HEIGHT- 1) 
-					|| (KnightTour.board[x+ delta[i][0]][y + delta[i][1]] != 0)
+					|| (KnightTour.board[y+ delta[i][1]][x + delta[i][0]] != 0)
 					)) {
 				nextPoints.add(new Point(x + delta[i][0], y + delta[i][1]));
 			}
@@ -62,7 +62,7 @@ public class Point implements Comparable<Point> {
 					|| (x + delta[i][0] > KnightTour.WIDTH - 1)
 					|| (y + delta[i][1] < 0)
 					|| (y + delta[i][1] > KnightTour.HEIGHT- 1)
-					|| (KnightTour.board[x + delta[i][0]][y + delta[i][1]] != 0)
+					|| (KnightTour.board[y + delta[i][1]][x + delta[i][0]] != 0)
 					)) {
 				viable++;
 			}

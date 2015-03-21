@@ -11,11 +11,11 @@ public class Move {
 	}
 	
 	public void addMove() {
-		KnightTour.board[p.x][p.y] = num;
+		KnightTour.board[p.y][p.x] = num;
 	}
 	
 	public void removeMove() {
-		KnightTour.board[p.x][p.y] = num;
+		KnightTour.board[p.y][p.x] = num;
 	}
 
 }

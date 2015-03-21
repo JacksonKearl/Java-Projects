@@ -18,7 +18,7 @@ public class KnightTour
 	public static void displayPath()
 	{
 		for (int i = 0; i < (WIDTH*HEIGHT); i++) {
-			System.out.printf("%-3d",board[i/HEIGHT][i%WIDTH]);
+			System.out.printf("%-3d",board[i/WIDTH][i%WIDTH]);
 			if ((i+1)%WIDTH == 0) 
 				System.out.println();
 		}
