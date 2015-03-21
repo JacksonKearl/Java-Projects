@@ -3,72 +3,80 @@ package coolSet7;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public class Point implements Comparable<Point>
-{
-	public int x, y;
-	int[][] board;
-	public int num;
-	public int goodness;
-	public Point(int x, int y, int[][] board, int num)
-	{
-		this.num = num;
+public class Point implements Comparable<Point> {
+	int x, y;
+
+	public Point(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.board = board;
-		board[x][y] = num;
-		goodness = getGoodness();
 	}
-	
-	private int getGoodness() {	
-		LinkedList<Point> ret = new LinkedList<Point>();
-		int[][] delta = {	{1,2},{-1,2},
-							{2,1},{2,-1},
-							{1,-2},{-1,-2},
-							{-2,1},{-2,-1}};
-		
-		for (int i = 0; i < 8; i++) {
-			if ( (x + delta[i][0] < 0) || (x + delta[i][0] > 7) ||
-				 (y + delta[i][1] < 0) || (y + delta[i][1] > 7) ||
-				 (board[x+ delta[i][0]][y + delta[i][1]] != 0)) {
-				//Do Nothing
-			} else {
-				ret.add(new Point(x + delta[i][0], y + delta[i][1], board, num + 1));
-			}
-		}
-		return ret.size();
-	}
-	
+
 	/**
-	 * returns an ArrayList containing all possible next 'Point's to go to, ordered by 
-	 * how many 'Point's each of them can go to. 
-	 * @return
+	 * DO NOT use this methods to determine size of array for comparator use. 
+	 * Doing so will cause a Stack Overflow Error. Use viability() instead.
+	 * 
+	 * @return List of all points that could be moved to after this point,
+	 *         ordered by how many other points can be moved to by them.
 	 */
-	public LinkedList<Point> findNextMoves() {
-		LinkedList<Point> ret = new LinkedList<Point>();
-		int[][] delta = {	{1,2},{-1,2},
-							{2,1},{2,-1},
-							{1,-2},{-1,-2},
-							{-2,1},{-2,-1}};
-		
+	public LinkedList<Point> nextPoints() {
+
+		LinkedList<Point> nextPoints = new LinkedList<Point>();
+
+		// set of possible moves for knight in terms of changes in x ([0]) and
+		// y([1]) coords.
+		int[][] delta = { { 1, 2 }, { -1, 2 }, { 2, 1 }, { 2, -1 }, { 1, -2 },
+				{ -1, -2 }, { -2, 1 }, { -2, -1 } };
+
 		for (int i = 0; i < 8; i++) {
-			if ( (x + delta[i][0] < 0) || (x + delta[i][0] > 7) ||
-				 (y + delta[i][1] < 0) || (y + delta[i][1] > 7) ||
-				 (board[x+ delta[i][0]][y + delta[i][1]] != 0)) {
-				//Do Nothing
-			} else {
-				ret.add(new Point(x + delta[i][0], y + delta[i][1], board, num + 1));
+
+			// if point is in bounds and unoccupied...
+			if (!(     (x + delta[i][0] < 0) 
+					|| (x + delta[i][0] > KnightTour.WIDTH - 1)
+					|| (y + delta[i][1] < 0) 
+					|| (y + delta[i][1] > KnightTour.HEIGHT- 1) 
+					|| (KnightTour.board[x+ delta[i][0]][y + delta[i][1]] != 0)
+					)) {
+				nextPoints.add(new Point(x + delta[i][0], y + delta[i][1]));
 			}
 		}
-		Collections.sort(ret);
-		if (ret.size() == 0) return null;
-		return ret;	
+		Collections.sort(nextPoints);
+		return nextPoints;
+	}
+
+	/**
+	 * 
+	 * @return How many points can be visited directly from this point. 
+	 */
+	public int viability() {
+		int viable = 0;
+		
+		// set of possible moves for knight in terms of changes in x ([0]) and
+		// y([1]) coords.
+		int[][] delta = { { 1, 2 }, { -1, 2 }, { 2, 1 }, { 2, -1 }, { 1, -2 },
+				{ -1, -2 }, { -2, 1 }, { -2, -1 } };
+
+		for (int i = 0; i < 8; i++) {
+			
+			// if point is in bounds and unoccupied...
+			if (!(     (x + delta[i][0] < 0)
+					|| (x + delta[i][0] > KnightTour.WIDTH - 1)
+					|| (y + delta[i][1] < 0)
+					|| (y + delta[i][1] > KnightTour.HEIGHT- 1)
+					|| (KnightTour.board[x + delta[i][0]][y + delta[i][1]] != 0)
+					)) {
+				viable++;
+			}
+		}
+		return viable;
 	}
 
 	@Override
-	public int compareTo(Point arg0)
-	{
-		if (this.goodness == arg0.goodness) 
-			return 0;
-		return (this.goodness < arg0.goodness) ? -1 : 1;
+	public int compareTo(Point o) {
+		return Integer.compare(this.viability(), o.viability());
 	}
+
+	public String toString() {
+		return x + " " + y + "\n";
+	}
+
 }
