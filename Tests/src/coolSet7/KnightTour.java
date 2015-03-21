@@ -1,51 +1,34 @@
 package coolSet7;
 
-import java.util.LinkedList;
-
-public class KnightTour
-{
+public class KnightTour {
 	public static final int HEIGHT = 8;
-	public static final int WIDTH  = 8;
-	
+	public static final int WIDTH = 8;
+
 	public static final Board board = new Board(HEIGHT, WIDTH);
-	
-	private static LinkedList<Point> path;
-	
-	public static void main( String args[] ) {
-		findPath();
+
+	public static void main(String args[]) {
+		long start = System.currentTimeMillis();
+		findPath(new Point(0,0, board), 1);
+		long finish = System.currentTimeMillis();
 		System.out.println(board);
+		System.out.println("Took " + (finish-start) + " miliseconds");
 	}
 
-	private static void findPath()
-	{
-		for (int i = 0; i < HEIGHT; i++) {
-			for (int j = 0; j < WIDTH; j++) {
-				path = rFindPath(new Point(i, j, board), 1);
-				if (path != null) return;
-			}
+	private static boolean findPath(Point nextPoint, int num) {
+		if (num == HEIGHT * WIDTH) { // base case. last move means all others
+			board.set(nextPoint, num); // are in viable positions, success
+			return true;
 		}
-	}
-	
-	private static LinkedList<Point> rFindPath(Point nextPoint, int num)
-	{
-		if (num == HEIGHT*WIDTH) {
-			LinkedList<Point> head = new LinkedList<Point>();			
-			board.set(nextPoint, num);
 
-			head.add(nextPoint);
-			return head;
-		}
-		
 		for (Point next : board.findNeighborsOf(nextPoint)) {
 			board.set(nextPoint, num);
-			LinkedList<Point> tail = rFindPath(next, num + 1);
-			if (tail != null) {
-				tail.add(nextPoint);
-				return tail;
+			
+			if (findPath(next, num + 1)) {
+				return true;
 			} else {
 				board.set(nextPoint, 0);
 			}
 		}
-		return null;
+		return false;
 	}
 }
