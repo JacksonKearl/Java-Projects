@@ -7,54 +7,43 @@ public class KnightTour
 	public static final int HEIGHT = 8;
 	public static final int WIDTH  = 8;
 	
-	public static int board[][] = new int[HEIGHT][WIDTH];
-	private static LinkedList<Move> path;
+	public static final Board board = new Board(HEIGHT, WIDTH);
+	
+	private static LinkedList<Point> path;
 	
 	public static void main( String args[] ) {
 		findPath();
-		displayPath();
-	}
-
-	public static void displayPath()
-	{
-		for (int i = 0; i < (WIDTH*HEIGHT); i++) {
-			System.out.printf("%-3d",board[i/WIDTH][i%WIDTH]);
-			if ((i+1)%WIDTH == 0) 
-				System.out.println();
-		}
-		
+		System.out.println(board);
 	}
 
 	private static void findPath()
 	{
 		for (int i = 0; i < HEIGHT; i++) {
 			for (int j = 0; j < WIDTH; j++) {
-				path = rFindPath(new Point(i, j), 1);
+				path = rFindPath(new Point(i, j, board), 1);
 				if (path != null) return;
 			}
 		}
 	}
 	
-	private static LinkedList<Move> rFindPath(Point nextPoint, int num)
+	private static LinkedList<Point> rFindPath(Point nextPoint, int num)
 	{
 		if (num == HEIGHT*WIDTH) {
-			LinkedList<Move> head = new LinkedList<Move>();
-			Move finalMove = new Move(nextPoint, num);
-			finalMove.addMove();
-			head.add(finalMove);
+			LinkedList<Point> head = new LinkedList<Point>();			
+			board.set(nextPoint, num);
+
+			head.add(nextPoint);
 			return head;
 		}
 		
-		for (Point next : nextPoint.nextPoints()) {
-			Move move = new Move(nextPoint, num);
-			move.addMove();
-			LinkedList<Move> tail = rFindPath(next, num + 1);
+		for (Point next : board.findNeighborsOf(nextPoint)) {
+			board.set(nextPoint, num);
+			LinkedList<Point> tail = rFindPath(next, num + 1);
 			if (tail != null) {
-				tail.add(move);
-				move.addMove();
+				tail.add(nextPoint);
 				return tail;
 			} else {
-				move.removeMove();
+				board.set(nextPoint, 0);
 			}
 		}
 		return null;
