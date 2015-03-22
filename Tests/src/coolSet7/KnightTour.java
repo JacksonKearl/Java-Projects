@@ -15,6 +15,12 @@ public class KnightTour {
 		System.out.println("Took " + (finish-start) + " miliseconds");
 	}
 
+	/**
+	 * 
+	 * @param nextPoint The location of the next point in the possible path
+	 * @param num       The position in path of this next point
+	 * @return			true if a viable path node, false otherwise
+	 */
 	private static boolean findPath(Point nextPoint, int num) {
 		if (num == HEIGHT * WIDTH) { // base case. last move means all others
 			board.set(nextPoint, num); // are in viable positions, success
