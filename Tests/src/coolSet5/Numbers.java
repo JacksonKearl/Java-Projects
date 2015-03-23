@@ -46,7 +46,7 @@ public class Numbers
 		
 	}
 	
-	private Boolean isPerfect(int num)
+	private static Boolean isPerfect(int num)
 	{
 		ArrayList<Integer> factors = getListOfFactors(num);
 		int sum = 0;

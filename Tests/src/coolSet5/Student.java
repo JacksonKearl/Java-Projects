@@ -14,7 +14,7 @@ public class Student implements Comparable<Student> {
 		return String.format("%-7s %-7s %05d\n", fName, lName, iD);
 	}
 	
-	public String randString() {
+	public static String randString() {
 		String retStr = "";
 		retStr += (char)((int)(Math.random() * 26 + 65));
 		for (int i = 0; i< 6; i++) {

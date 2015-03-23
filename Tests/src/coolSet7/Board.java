@@ -30,7 +30,7 @@ public class Board {
 			for(int clear = 0; clear < 20; clear++)
 			{
 
-				System.out.println("\b") ;
+				System.out.println("\n") ;
 			}
 		}
 	}

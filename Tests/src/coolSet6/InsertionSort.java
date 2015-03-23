@@ -21,13 +21,14 @@ public class InsertionSort {
 	 * Runs in O(k), where k is distance element is from its
 	 * proper position.
 	 */
-	private static void sortInsert(int[] arr, int i) {
+	private static void sortInsert(int[] arr, int startVal) {
+		int i = startVal;
 		int insVal = arr[i];    // store value to insert
 		while (i > 0) {
 			arr[i] = arr[i - 1];     // shift values at head over by 1
 			if (arr[i - 1] < insVal) // keep going until the next item is lower
 				break;
-			i--;
+			--i;
 		}
 		arr[i] = insVal;    // at this point, all elements after i are shifted
 							// i corresponds to proper location to insert value
