@@ -25,16 +25,17 @@ public class Collection
 
 		try {
 			final Scanner inFile = new Scanner(new File(fileName));
-			// inFile.useDelimiter(" ");
-			final int numReleases = inFile.nextInt();
+			final int numReleases = Integer.parseInt(inFile.nextLine());
 			movieList = new Movie[numReleases];
+
 			for (int i = 0; i < numReleases; i++) {
-				movieTitle = inFile.next();
-				bondName = inFile.next();
+				movieTitle = inFile.nextLine().trim();
+				bondName = inFile.nextLine().trim();
 				yearReleased = inFile.nextInt();
 				movieRating = inFile.nextDouble();
 				lengthHours = inFile.nextInt();
-				lengthMinutes = inFile.nextInt();
+				lengthMinutes = Integer.parseInt(inFile.nextLine().trim());
+
 				movieList[i] = new Movie(movieTitle, bondName, yearReleased,
 						movieRating, lengthHours, lengthMinutes);
 
@@ -50,11 +51,21 @@ public class Collection
 	{
 		System.out.printf("%34s%16s%6s%7s%16s\n\n", "Film Title", "Bond Actor",
 				"Year", "Rating", "Film Length");
-
+		double totalRating = 0;
+		int totalTime = 0;
 		for (int i = movieList.length - 1; i >= 0; i--) {
-			final String output = movieList[i].toString();
+			final Movie output = movieList[i];
 			System.out.println(output);
+			totalRating += output.getFilmRating();
+			totalTime += output.getFilmHrs() * 60 + output.getFilmMin();
 		}
+		final double avgRating = totalRating / movieList.length;
+		final int avgTime = totalTime / movieList.length;
+
+		System.out.printf("Average Rating = %.1f/4.0\n", avgRating);
+		System.out.printf("Average Length = %dhrs and %dmins", avgTime / 60,
+				avgTime % 60);
+
 	}
 
 	public void sort()
