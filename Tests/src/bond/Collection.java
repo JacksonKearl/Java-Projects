@@ -25,16 +25,18 @@ public class Collection
 
 		try {
 			final Scanner inFile = new Scanner(new File(fileName));
-			final int numReleases = Integer.parseInt(inFile.nextLine());
+			final int numReleases = inFile.nextInt();
 			movieList = new Movie[numReleases];
 
 			for (int i = 0; i < numReleases; i++) {
+				inFile.nextLine();
+
 				movieTitle = inFile.nextLine().trim();
 				bondName = inFile.nextLine().trim();
 				yearReleased = inFile.nextInt();
 				movieRating = inFile.nextDouble();
 				lengthHours = inFile.nextInt();
-				lengthMinutes = Integer.parseInt(inFile.nextLine().trim());
+				lengthMinutes = inFile.nextInt();
 
 				movieList[i] = new Movie(movieTitle, bondName, yearReleased,
 						movieRating, lengthHours, lengthMinutes);
