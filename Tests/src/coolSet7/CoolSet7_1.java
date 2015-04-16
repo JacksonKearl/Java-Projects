@@ -1,28 +1,20 @@
 package coolSet7;
 
-import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class CoolSet7_1
 {
 	public static void main(String args[]) throws IOException
 	{
-		FileReader inFile = new FileReader("src/coolSet7/coolset7-1.dat");
-		
-		String str = "";
-		int c = inFile.read();
-		while (c != -1) {
-			if (c == '\r') { //Do noting. Windows systems. 
-			} else if (c == '\n') {
-				createThing(str);
-				str = "";
-			} else {
-				str += (char)c;
-			}
-			c = inFile.read();
+		Scanner inFile = new Scanner(new File("src/coolSet7/coolset7-1.dat"));
+
+		while (inFile.hasNextLine()) {
+			createThing(inFile.nextLine());
 		}
 		inFile.close();
-		
+
 	}
 
 	private static void createThing(String str)
@@ -30,6 +22,5 @@ public class CoolSet7_1
 		FancyWord word = new FancyWord(str);
 		System.out.println(word);
 	}
-	
-	
+
 }
